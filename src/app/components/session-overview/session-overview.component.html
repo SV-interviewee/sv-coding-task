@@ -1,0 +1,73 @@
+<table mat-table [dataSource]="sessions">
+  <ng-container matColumnDef="category">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let session" class="category">
+      <div *ngIf="session.company.category" [innerHTML]="session.company.category.icon | safeHtml" [style]="'--svg-color:' + session.company.category.color"></div>
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="date">
+    <th mat-header-cell *matHeaderCellDef>Date</th>
+    <td mat-cell *matCellDef="let session"> {{session.startedAt | date:"HH:mm"}} </td>
+  </ng-container>
+  <ng-container matColumnDef="company">
+    <th mat-header-cell *matHeaderCellDef>Company</th>
+    <td mat-cell *matCellDef="let session" class="row">
+      <span>{{session.company.name}}
+        <img *ngIf="session.company.note" ngSrc="assets/icons_frontend_task/note.svg"
+             width="16" height="16" alt="Note" class="green" [matTooltip]="session.company.note">
+      </span>
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="sector">
+    <th mat-header-cell *matHeaderCellDef>Sector</th>
+    <td mat-cell *matCellDef="let session"> {{session.company.sector.name}} </td>
+  </ng-container>
+  <ng-container matColumnDef="city">
+    <th mat-header-cell *matHeaderCellDef>City</th>
+    <td mat-cell *matCellDef="let session"> {{session.company.city}} </td>
+  </ng-container>
+  <ng-container matColumnDef="pages">
+    <th mat-header-cell *matHeaderCellDef>Pages</th>
+    <td mat-cell *matCellDef="let session">
+      <div visitedPagesTooltip [session]="session">{{session.visits.length}}</div>
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="duration">
+    <th mat-header-cell *matHeaderCellDef>Duration (Video)</th>
+    <td mat-cell *matCellDef="let session" class="row">
+      <span>{{session | duration | date:"mm:ss"}}
+        <img ngSrc="assets/icons_frontend_task/video.svg"
+             width="24" height="24" alt="Video" class="grey">
+      </span>
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="source">
+    <th mat-header-cell *matHeaderCellDef>Source</th>
+    <td mat-cell *matCellDef="let session"> {{session.referer.referer_source}} </td>
+  </ng-container>
+  <ng-container matColumnDef="interest">
+    <th mat-header-cell *matHeaderCellDef>Interest</th>
+    <td mat-cell *matCellDef="let session"> {{session.mainInterest}}
+      <span class="additional-interests" *ngIf="session.interests.length > 1" matTooltip="{{(session.interests | pluck:'name').join(', ')}}">
+        +{{session.interests.length - 1}}
+      </span>
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="more">
+    <th mat-header-cell *matHeaderCellDef><div class="more">More</div></th>
+    <td mat-cell *matCellDef="let session" class="row separated">
+      <div class="more">
+      <span>
+        <img ngSrc="assets/icons_frontend_task/website_globe.svg"
+             width="24" height="24" alt="Video" class="grey more">
+        <img ngSrc="assets/icons_frontend_task/id_card.svg"
+             width="24" height="24" alt="Video" class="grey more">
+        <img ngSrc="assets/icons_frontend_task/3_dot_menu.svg"
+             width="24" height="24" alt="Video" class="grey more small">
+      </span>
+      </div>
+    </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="columnsToDisplay; sticky: true"></tr>
+  <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
+</table>

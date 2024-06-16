@@ -1,0 +1,44 @@
+.row span {
+  display: flex;
+  gap: .5em;
+  align-items: center;
+}
+
+.row.separated span {
+  gap: 0;
+}
+
+.green {
+  filter: invert(62%) sepia(23%) saturate(1017%) hue-rotate(72deg) brightness(91%) contrast(85%);
+}
+
+.grey {
+  filter: invert(63%) sepia(3%) saturate(7%) hue-rotate(324deg) brightness(98%) contrast(97%);
+}
+
+.additional-interests {
+  color: gray;
+}
+
+img.more {
+  padding: 0 .5em;
+}
+
+img.more + img.more {
+  border-left: 1px solid gray;
+}
+
+div.more {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 1200px) {
+  img.more:not(.small) {
+    display: none;
+  }
+  img.more + img.more {
+    border: none;
+  }
+}

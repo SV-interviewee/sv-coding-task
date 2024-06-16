@@ -1,0 +1,27 @@
+<div class="tooltip" [style.left]="left + 'px'" [style.top]="top + 'px'" [ngClass]="['tooltip-'+tooltipPosition]">
+<div class="horizontal-flex">
+  <h2>Visited Pages</h2>
+  <mat-checkbox>Show events</mat-checkbox>
+</div>
+<mat-divider></mat-divider>
+<mat-list>
+  <mat-list-item *ngFor="let visit of session?.visits; index as i">
+    <div class="horizontal-flex main-content">
+      <div class="horizontal-flex">
+        <div class="number connect" [ngClass]="{
+          'connect': getSize() > 1,
+          'first' : i == 0,
+          'last' : i == getSize() - 1,
+        }"><span>{{i+1}}</span></div>
+        <div class="url">{{visit.url}}</div>
+      </div>
+      <div>{{visit | duration | date:"mm:ss"}}</div>
+    </div>
+  </mat-list-item>
+</mat-list>
+<mat-divider></mat-divider>
+<div class="horizontal-flex footer">
+  <span>Total duration:</span>
+  <span *ngIf="session">{{session | duration | date:"mm:ss"}}</span>
+</div>
+</div>

@@ -1,0 +1,51 @@
+:root {
+  --svg-color: black;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-column-category.category {
+  padding-right: 0;
+}
+
+.mat-column-category svg {
+  fill: var(--svg-color);
+  width: 1.5em;
+  height: 1.5em;
+}
+
+.horizontal-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Size XL */
+@media (max-width: 1800px) {
+  .mat-column-sector {
+    display: none;
+  }
+}
+
+/* Size L */
+@media (max-width: 1600px) {
+  .mat-column-city, .mat-column-source {
+    display: none;
+  }
+}
+
+/* Size M */
+@media (max-width: 1400px) {
+  .mat-column-interest {
+    display: none;
+  }
+}
+
+/* Size S */
+@media (max-width: 1200px) {
+  .mat-column-pages {
+    display: none;
+  }
+}
+
